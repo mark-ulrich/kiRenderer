@@ -1,0 +1,1 @@
+g++.exe -Wall -o build/renderer.exe src/main.cpp src/kiDisplay.cpp src/kiRasterizer.cpp src/kiError.cpp -mwindows -I ./include -I ./3rd_party/SDL2-2.0.12/x86_64-w64-mingw32/include -L ./3rd_party/SDL2-2.0.12/x86_64-w64-mingw32/lib -lmingw32 -lSDL2main -lSDL2
