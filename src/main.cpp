@@ -1,3 +1,9 @@
+#define KIR_USE_STB_IMAGE
+
+#if defined(KIR_USE_STB_IMAGE)
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+#endif
 #include <SDL2/SDL.h>
 
 #include <iostream>

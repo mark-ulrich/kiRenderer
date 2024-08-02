@@ -16,14 +16,22 @@ class kiTexture
 
   u32* data = nullptr;
   int width, height;
+  int numChannels;
 
 public:
-  kiTexture(int width, int height)
+  kiTexture(int width, int height, int numChannels = 4)
     : width(width)
     , height(height)
-  {}
+    , numChannels(numChannels)
+  {
+    data = new u32[width * height * numChannels];
+  }
 
   static kiTexture* LoadFromFile(std::string const& path);
+  FE_NODISCARD kiColor GetPixel(int x, int y) const;
+
+  FE_NODISCARD int GetWidth() const { return width; }
+  FE_NODISCARD int GetHeight() const { return height; }
 };
 
 #endif // __KITEXTURE_H__

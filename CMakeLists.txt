@@ -30,6 +30,7 @@ set(SOURCES
         src/zlib.cpp
         src/Math.cpp
         src/Timer.cpp
+        3rd_party/stb/stb_image.h
 )
 
 
