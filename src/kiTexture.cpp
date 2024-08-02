@@ -1,12 +1,14 @@
 #include <stb_image.h>
+
 #include <SDL2/SDL.h>
 #include <cstdio>
+#include <format>
 #include <string>
 
 #include "PNGLib.h"
 #include "kiError.h"
 #include "kiTexture.h"
-#include "kiTypes.h"
+#include "types.h"
 
 // TODO: Maybe use magic number instead of extension to determine filetype
 kiTexture*

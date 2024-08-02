@@ -1,7 +1,7 @@
 #include <sstream>
 
 #include "kiError.h"
-#include "kiTypes.h"
+#include "types.h"
 #include "zlib.h"
 
 // TODO: I really should use zlib first, then come back to this implementation
@@ -10,10 +10,10 @@
 void
 zlibDeflate(void* destBuffer, void* compressed)
 {
-  byte* src = (byte*)compressed;
-  byte* dst = (byte*)destBuffer;
+  byte_t* src = (byte_t*)compressed;
+  byte_t* dst = (byte_t*)destBuffer;
 
-  byte cmf = src[0];
+  byte_t cmf = src[0];
   // Verify deflate compression with 32K window
   if (cmf != 0x78) {
     kiFatal("zlibDeflate: bad compression method/window size");
@@ -23,7 +23,7 @@ zlibDeflate(void* destBuffer, void* compressed)
   //   The FCHECK value must be such that CMF and FLG, when viewed as
   //   a 16-bit unsigned integer stored in MSB order (CMF*256 + FLG),
   //   is a multiple of 31.
-  byte flg = src[1];
+  byte_t flg = src[1];
   if (((cmf << 8) + flg) % 31 != 0) {
     kiFatal("zlibDeflate: FCHECK check failed");
   }

@@ -5,8 +5,8 @@
 
 #include "kiColor.h"
 #include "kiTexture.h"
-#include "kiTypes.h"
-#include "kiVector.h"
+#include "types.h"
+#include "Vector2.h"
 
 class kiRenderer
 {

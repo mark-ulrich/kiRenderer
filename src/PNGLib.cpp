@@ -1,11 +1,13 @@
-#include <cstdio>
-#include <cstdlib>
+#include <SDL2/SDL.h>
 
 #include "PNGLib.h"
 #include "kiError.h"
-#include "kiTypes.h"
+#include "types.h"
 #include "kiUtil.h"
 #include "zlib.h"
+
+#include <cstdio>
+#include <cstdlib>
 
 #define PNG_IHDR 0x49484452
 #define PNG_IDAT 0x49444154

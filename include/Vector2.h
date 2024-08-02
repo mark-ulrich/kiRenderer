@@ -7,9 +7,10 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 
-#include "core/types.h"
-#include "fe/core/macros.h"
 #include "kiMath.h"
+#include "macros.h"
+#include "types.h"
+
 #include <string>
 #include <valarray>
 

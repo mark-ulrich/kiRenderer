@@ -3,6 +3,8 @@
 
 #include "kiTypes.h"
 
+#include "macros.h"
+#include "types.h"
 
 struct kiColor
 {

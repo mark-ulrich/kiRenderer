@@ -6,8 +6,8 @@
 
 #include <fe/core/macros.h>
 
-#include "core/types.h"
-#include <SDL.h>
+#include "macros.h"
+#include "types.h"
 
 namespace fe::Math {
 

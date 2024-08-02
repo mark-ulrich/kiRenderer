@@ -3,7 +3,9 @@
 
 #include <string>
 
-#include "kiTypes.h"
+#include "kiColor.h"
+#include "macros.h"
+#include "types.h"
 
 // TODO: Write a PNG loader for starters
 // TODO: Develop a simple custom texture format and tools to convert from
