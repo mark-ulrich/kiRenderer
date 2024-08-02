@@ -46,9 +46,13 @@ kiRenderer::~kiRenderer()
 }
 
 inline void
-kiRenderer::DrawPixel(kiVector2i const& position, kiColor const& color)
+kiRenderer::DrawPixel(Vector2i const& position, kiColor const& color)
 {
   assert(isLocked);
+  if (position.x < 0 || position.x >= width || position.y < 0 ||
+      position.y >= height) {
+    return;
+  }
   int index = position.y * (pitch / 4) + position.x;
   u32 pixel = color.PackARGB();
   pixels[index] = pixel;
@@ -131,7 +135,13 @@ kiRenderer::Unlock()
 }
 
 void
-kiRenderer::Blit(kiTexture const& texture, kiVector2i const& position)
+kiRenderer::Blit(kiTexture const& texture, Vector2i const& position)
 {
-  // NOT IMPLEMENTED
+  // TODO: Optimize this
+  for (int y = 0; y < texture.GetHeight(); ++y) {
+    for (int x = 0; x < texture.GetWidth(); ++x) {
+      DrawPixel(Vector2i(x + position.x, y + position.y),
+                texture.GetPixel(x, y));
+    }
+  }
 }

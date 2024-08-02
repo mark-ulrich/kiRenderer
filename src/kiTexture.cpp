@@ -50,3 +50,11 @@ kiTexture::LoadFromFile(std::string const& path)
   return tex;
 #endif
 }
+
+kiColor
+kiTexture::GetPixel(int x, int y) const
+{
+  int index = y * width + x;
+  u32 pixel = data[index];
+  return kiColor::FromRGB(pixel);
+}

@@ -31,7 +31,7 @@ main(int argc, char* argv[])
   SDL_Init(SDL_INIT_EVERYTHING);
 
   kiRenderer renderer(WIDTH, HEIGHT);
-  kiTexture* tex = kiTexture::LoadFromFile("test.png");
+  kiTexture* tex = kiTexture::LoadFromFile("test_rgb.png");
 
   bool isRunning = true;
   while (isRunning) {
@@ -60,12 +60,14 @@ main(int argc, char* argv[])
       renderer.Clear();
     }
 
+    renderer.Blit(*tex, Vector2i(0, 0));
+
     // TEST LINES
     kiColor color(0.2f, 1.0f, 0.2f);
-    renderer.DrawLine(kiVector2i(20, 10), kiVector2i(20, 100), color);
-    renderer.DrawLine(kiVector2i(45, 100), kiVector2i(90, 100), color);
-    renderer.DrawLine(kiVector2i(20, 349), kiVector2i(20, 132), color);
-    renderer.DrawLine(kiVector2i(430, 100), kiVector2i(210, 100), color);
+    renderer.DrawLine(Vector2i(20, 10), Vector2i(20, 100), color);
+    renderer.DrawLine(Vector2i(45, 100), Vector2i(90, 100), color);
+    renderer.DrawLine(Vector2i(20, 199), Vector2i(20, 132), color);
+    renderer.DrawLine(Vector2i(310, 100), Vector2i(210, 100), color);
 
     renderer.Unlock();
 
