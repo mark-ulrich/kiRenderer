@@ -4,6 +4,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #endif
+
 #include <SDL2/SDL.h>
 
 #include <iostream>
@@ -11,8 +12,8 @@
 
 #include "kiRenderer.h"
 
-#define WIDTH 960
-#define HEIGHT 540
+#define WIDTH 320
+#define HEIGHT 200
 
 void
 LogConsole(std::string const& msg);
