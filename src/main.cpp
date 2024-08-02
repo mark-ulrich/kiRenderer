@@ -23,6 +23,9 @@ using std::endl;
 int
 main(int argc, char* argv[])
 {
+  FE_UNUSED_PARM(argc);
+  FE_UNUSED_PARM(argv);
+
   LogConsole("Initializing...");
   SDL_Init(SDL_INIT_EVERYTHING);
 

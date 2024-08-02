@@ -95,35 +95,29 @@ kiRenderer::Render() const
 void
 kiRenderer::DrawLineVertical(int x, int y1, int y2, kiColor const& color)
 {
-  using std::max;
-  using std::min;
-
-  int begin = min(y1, y2);
-  int end = max(y1, y2);
+  int begin = std::min(y1, y2);
+  int end = std::max(y1, y2);
 
   for (int y = begin; y < end; ++y) {
-    DrawPixel(kiVector2i(x, y), color);
+    DrawPixel(Vector2i(x, y), color);
   }
 }
 
 void
 kiRenderer::DrawLineHorizontal(int y, int x1, int x2, kiColor const& color)
 {
-  using std::max;
-  using std::min;
-
-  int begin = min(x1, x2);
-  int end = max(x1, x2);
+  int begin = std::min(x1, x2);
+  int end = std::max(x1, x2);
 
   for (int x = begin; x < end; ++x) {
-    DrawPixel(kiVector2i(x, y), color);
+    DrawPixel(Vector2i(x, y), color);
   }
 }
 
 void
 kiRenderer::Lock()
 {
-  if (SDL_LockTexture(frameBuffer, NULL, (void**)&pixels, &pitch) < 0) {
+  if (SDL_LockTexture(frameBuffer, nullptr, (void**)&pixels, &pitch) < 0) {
     kiFatal();
   }
   isLocked = true;

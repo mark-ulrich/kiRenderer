@@ -75,7 +75,7 @@ struct Vector2
    * @param a Other Vector2 (of type U)
    */
   template<typename U>
-  FE_FORCEINLINE Vector2<T>(Vector2<U> const& a)
+  explicit FE_FORCEINLINE Vector2<T>(Vector2<U> const& a)
     : Vector2<T>(static_cast<T>(a.x), static_cast<T>(a.y))
   {
   }
@@ -92,9 +92,9 @@ struct Vector2
    * @brief Return the angle in degrees
    * @return Angle in degrees
    */
-  FE_FORCEINLINE real_t Angle() const;
+  FE_NODISCARD FE_FORCEINLINE real_t Angle() const;
 
-  FE_FORCEINLINE real_t Aspect() const;
+  FE_NODISCARD FE_FORCEINLINE real_t Aspect() const;
 
   FE_FORCEINLINE real_t DistanceTo(Vector2<T> const& v2) const;
 

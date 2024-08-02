@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <fe/core/macros.h>
+#include <SDL2/SDL.h>
 
 #include "macros.h"
 #include "types.h"

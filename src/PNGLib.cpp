@@ -25,7 +25,7 @@ typedef struct
 
 typedef struct
 {
-  i32 width, height;
+  s32 width, height;
   u8 bitDepth;
   u8 colorType;
   u8 compressionMethod;

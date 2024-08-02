@@ -20,6 +20,8 @@ typedef int64_t s64;
 typedef float f32;
 typedef double f64;
 
+typedef u8 byte_t;
+
 // typedef std::u8string string_t;
 typedef std::string string_t;
 
