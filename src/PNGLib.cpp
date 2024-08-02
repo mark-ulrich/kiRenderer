@@ -200,13 +200,11 @@ LoadTexturePNG(std::string const& path)
   ChunkNode* prev = nullptr;
   node = png.chunks;
   while (node) {
-    if (node->chunk) {
-      if (node->chunk->data) {
-        if (node->chunk->type == PNG_IHDR) {
-          delete (PNGIHDR*)node->chunk->data;
-        } else if (node->chunk->type == PNG_IDAT) {
-          delete[](u8*) node->chunk->data;
-        }
+    if (node->chunk && node->chunk->data) {
+      if (node->chunk->type == PNG_IHDR) {
+        delete (PNGIHDR*)node->chunk->data;
+      } else if (node->chunk->type == PNG_IDAT) {
+        delete[](u8*) node->chunk->data;
       }
       delete node->chunk;
     }

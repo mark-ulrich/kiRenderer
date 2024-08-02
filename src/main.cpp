@@ -3,9 +3,7 @@
 #include <iostream>
 #include <string>
 
-#include "kiDisplay.h"
 #include "kiRenderer.h"
-#include "kiTexture.h"
 
 #define WIDTH 960
 #define HEIGHT 540
