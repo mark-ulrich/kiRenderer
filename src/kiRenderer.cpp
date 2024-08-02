@@ -56,8 +56,8 @@ kiRenderer::DrawPixel(kiVector2i const& position, kiColor const& color)
 
 // Render a colored line between points p1 and p2.
 void
-kiRenderer::DrawLine(kiVector2i const& p1,
-                     kiVector2i const& p2,
+kiRenderer::DrawLine(Vector2i const& p1,
+                     Vector2i const& p2,
                      kiColor const& color)
 {
   using std::max;
@@ -79,7 +79,7 @@ kiRenderer::Clear(kiColor const& color)
 {
   for (int y = 0; y < height; ++y) {
     for (int x = 0; x < width; ++x) {
-      DrawPixel(kiVector2i(x, y), color);
+      DrawPixel(Vector2i(x, y), color);
     }
   }
 }

@@ -57,7 +57,7 @@ LoadTexturePNG(std::string const& path)
   char sChunkType[5];
   size_t totalDataLength;
 
-  memset(sChunkType, 0, 5);
+  SDL_memset(sChunkType, 0, 5);
 
   // TODO: Implement a platform-independent file loader
   FILE* fp = nullptr;

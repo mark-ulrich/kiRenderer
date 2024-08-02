@@ -34,18 +34,18 @@ public:
 
   // Drawing Interface
   // TODO: Include methods to draw individual pixels, lines (vertical,
-  void DrawPixel(kiVector2i const& position, kiColor const& color);
+  void DrawPixel(Vector2i const& position, kiColor const& color);
 
-  void DrawLine(kiVector2i const& p1, kiVector2i const& p2)
+  void DrawLine(Vector2i const& p1, Vector2i const& p2)
   {
     DrawLine(p1, p2, drawColor);
   }
-  void DrawLine(kiVector2i const& p1,
-                kiVector2i const& p2,
+  void DrawLine(Vector2i const& p1,
+                Vector2i const& p2,
                 kiColor const& color);
 
   // TODO: Implement an "extended" version of Blit
-  void Blit(kiTexture const& texture, kiVector2i const& position);
+  void Blit(kiTexture const& texture, Vector2i const& position);
 
   void Clear() { Clear(drawColor); }
   void Clear(kiColor const& color);
