@@ -26,6 +26,10 @@ struct Vector2
   static Vector2<T> const Left;
   static Vector2<T> const Up;
   static Vector2<T> const Down;
+  static Vector2<T> const East;
+  static Vector2<T> const West;
+  static Vector2<T> const North;
+  static Vector2<T> const South;
 
   union
   {
@@ -649,6 +653,18 @@ Vector2<T> const Vector2<T>::Up = { 0, 1 };
 
 template<typename T>
 Vector2<T> const Vector2<T>::Down = { 0, -1 };
+
+template<typename T>
+Vector2<T> const Vector2<T>::East = { 1, 0 };
+
+template<typename T>
+Vector2<T> const Vector2<T>::West = { -1, 0 };
+
+template<typename T>
+Vector2<T> const Vector2<T>::North = { 0, 1 };
+
+template<typename T>
+Vector2<T> const Vector2<T>::South = { 0, -1 };
 
 } // namespace fe::Math
 
