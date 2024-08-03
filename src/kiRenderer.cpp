@@ -5,18 +5,23 @@
 #include "kiError.h"
 #include "kiRenderer.h"
 
-kiRenderer::kiRenderer(u32 width, u32 height)
+kiRenderer::kiRenderer(int width, int height, float scale)
+  : width(width)
+  , height(height)
+  , scale(scale)
+  , isLocked(false)
 {
-  this->width = width;
-  this->height = height;
+  this->pitch = width * 4;
+  this->pixels = nullptr;
 
   // Init SDL window & renderer
-  sdlWindow = SDL_CreateWindow("kiRenderer",
-                               SDL_WINDOWPOS_CENTERED,
-                               SDL_WINDOWPOS_CENTERED,
-                               width,
-                               height,
-                               0);
+  sdlWindow =
+    SDL_CreateWindow("kiRenderer",
+                     SDL_WINDOWPOS_CENTERED,
+                     SDL_WINDOWPOS_CENTERED,
+                     static_cast<int>(static_cast<float>(width) * scale),
+                     static_cast<int>(static_cast<float>(height) * scale),
+                     0);
   if (!sdlWindow) {
     kiFatal();
   }
@@ -92,7 +97,7 @@ void
 kiRenderer::Render() const
 {
   SDL_RenderClear(sdlRenderer);
-  SDL_RenderCopy(sdlRenderer, frameBuffer, NULL, NULL);
+  SDL_RenderCopy(sdlRenderer, frameBuffer, nullptr, nullptr);
   SDL_RenderPresent(sdlRenderer);
 }
 
@@ -121,7 +126,8 @@ kiRenderer::DrawLineHorizontal(int y, int x1, int x2, kiColor const& color)
 void
 kiRenderer::Lock()
 {
-  if (SDL_LockTexture(frameBuffer, nullptr, (void**)&pixels, &pitch) < 0) {
+  if (SDL_LockTexture(frameBuffer, nullptr, (void**)&pixels, (int*)&pitch) <
+      0) {
     kiFatal();
   }
   isLocked = true;
@@ -138,8 +144,11 @@ void
 kiRenderer::Blit(kiTexture const& texture, Vector2i const& position)
 {
   // TODO: Optimize this
-  for (int y = 0; y < texture.GetHeight(); ++y) {
-    for (int x = 0; x < texture.GetWidth(); ++x) {
+  for (int y = 0; y < texture.Height(); ++y) {
+    for (int x = 0; x < texture.Width(); ++x) {
+      kiColor const& color = texture.GetPixel(x, y);
+      if (texture.UsesColorKey() && color == texture.ColorKey())
+        continue;
       DrawPixel(Vector2i(x + position.x, y + position.y),
                 texture.GetPixel(x, y));
     }

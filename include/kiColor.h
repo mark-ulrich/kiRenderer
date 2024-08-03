@@ -29,6 +29,11 @@ struct kiColor
   static kiColor FromARGB(u32 packed);
   static kiColor FromRGBA(u32 packed);
   static kiColor FromRGB(u32 packed);
+
+  bool operator==(kiColor const& other) const
+  {
+    return r == other.r && g == other.g && b == other.b && a == other.a;
+  }
 };
 
 #endif //  __KICOLOR_H__

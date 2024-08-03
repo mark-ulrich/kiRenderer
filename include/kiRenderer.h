@@ -3,14 +3,14 @@
 
 #include <SDL2/SDL.h>
 
+#include "Vector2.h"
 #include "kiColor.h"
 #include "kiTexture.h"
 #include "types.h"
-#include "Vector2.h"
 
 class kiRenderer
 {
-  int width, height;
+  u32 width, height;
 
   SDL_Window* sdlWindow;
   SDL_Renderer* sdlRenderer;
@@ -25,8 +25,10 @@ class kiRenderer
   u32* pixels;
   bool isLocked;
 
+  float scale = 1.0f;
+
 public:
-  kiRenderer(u32 width, u32 height);
+  kiRenderer(int width, int height, float scale = 1.0f);
   ~kiRenderer();
 
   void Lock();
@@ -40,9 +42,7 @@ public:
   {
     DrawLine(p1, p2, drawColor);
   }
-  void DrawLine(Vector2i const& p1,
-                Vector2i const& p2,
-                kiColor const& color);
+  void DrawLine(Vector2i const& p1, Vector2i const& p2, kiColor const& color);
 
   // TODO: Implement an "extended" version of Blit
   void Blit(kiTexture const& texture, Vector2i const& position);

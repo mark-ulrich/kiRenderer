@@ -2,8 +2,8 @@
 
 #include "PNGLib.h"
 #include "kiError.h"
-#include "types.h"
 #include "kiUtil.h"
+#include "types.h"
 #include "zlib.h"
 
 #include <cstdio>
@@ -41,7 +41,7 @@ typedef struct ChunkNode_s
 
 typedef struct
 {
-  PNGIHDR* IHDR; // Pointer to header data within the the IHDR chunk
+  PNGIHDR* IHDR; // Pointer to header data within the IHDR chunk
   ChunkNode* chunks;
 } PNGFile;
 
@@ -206,7 +206,7 @@ LoadTexturePNG(std::string const& path)
       if (node->chunk->type == PNG_IHDR) {
         delete (PNGIHDR*)node->chunk->data;
       } else if (node->chunk->type == PNG_IDAT) {
-        delete[](u8*) node->chunk->data;
+        delete[] (u8*)node->chunk->data;
       }
       delete node->chunk;
     }
