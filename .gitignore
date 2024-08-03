@@ -2,7 +2,6 @@
 /build/
 /dist/
 /cmake-*/
-/3rd_party/
 *.o
 *.obj
 *.bin
