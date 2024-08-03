@@ -12,8 +12,9 @@
 
 #include "kiRenderer.h"
 
-#define WIDTH 320
-#define HEIGHT 200
+static int const Width = 320;
+static int const Height = 200;
+static float const RenderScale = 4.0f;
 
 void
 LogConsole(std::string const& msg);
@@ -30,7 +31,7 @@ main(int argc, char* argv[])
   LogConsole("Initializing...");
   SDL_Init(SDL_INIT_EVERYTHING);
 
-  kiRenderer renderer(WIDTH, HEIGHT);
+  kiRenderer renderer(Width, Height, RenderScale);
   kiTexture* tex = kiTexture::LoadFromFile("test_rgb.png");
 
   bool isRunning = true;

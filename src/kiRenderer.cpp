@@ -5,17 +5,19 @@
 #include "kiError.h"
 #include "kiRenderer.h"
 
-kiRenderer::kiRenderer(u32 width, u32 height)
+kiRenderer::kiRenderer(int width, int height, float scale)
 {
   this->width = width;
   this->height = height;
+  this->scale = scale;
+
 
   // Init SDL window & renderer
   sdlWindow = SDL_CreateWindow("kiRenderer",
                                SDL_WINDOWPOS_CENTERED,
                                SDL_WINDOWPOS_CENTERED,
-                               width,
-                               height,
+                               static_cast<int>(static_cast<float>(width) * scale),
+                                   static_cast<int>(static_cast<float>(height) * scale),
                                0);
   if (!sdlWindow) {
     kiFatal();

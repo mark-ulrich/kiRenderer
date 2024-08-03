@@ -11,6 +11,7 @@
 class kiRenderer
 {
   int width, height;
+  float scale;
 
   SDL_Window* sdlWindow;
   SDL_Renderer* sdlRenderer;
@@ -26,7 +27,7 @@ class kiRenderer
   bool isLocked;
 
 public:
-  kiRenderer(u32 width, u32 height);
+  kiRenderer(int width, int height, float scale = 1.0f);
   ~kiRenderer();
 
   void Lock();
