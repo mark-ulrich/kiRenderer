@@ -1,3 +1,5 @@
+#define DEBUG
+
 #define KIR_USE_STB_IMAGE
 
 #if defined(KIR_USE_STB_IMAGE)
@@ -32,7 +34,9 @@ main(int argc, char* argv[])
   SDL_Init(SDL_INIT_EVERYTHING);
 
   kiRenderer renderer(Width, Height, RenderScale);
-  kiTexture* tex = kiTexture::LoadFromFile("test_rgb.png");
+  kiTexture* tex = kiTexture::LoadFromFile("test.png");
+  //  kiTexture* tex = kiTexture::LoadFromFile("test_rgb.png");
+  //  tex->SetColorKey(kiColor(0, 0, 0));
 
   bool isRunning = true;
   while (isRunning) {
@@ -50,15 +54,26 @@ main(int argc, char* argv[])
             break;
         }
       }
+
+      if (event.type == SDL_MOUSEBUTTONDOWN &&
+          event.button.button == SDL_BUTTON_LEFT) {
+        int x, y;
+        SDL_GetMouseState(&x, &y);
+        x = static_cast<int>(static_cast<float>(x) / RenderScale);
+        y = static_cast<int>(static_cast<float>(y) / RenderScale);
+        cout << "Mouse clicked at: " << x << ", " << y << endl;
+      }
     }
 
     renderer.Lock();
 
     u8 const* keys = SDL_GetKeyboardState(NULL);
     if (keys[SDL_SCANCODE_J]) {
-      renderer.Clear(kiColor(0.4, 0.4, 0.4));
-    } else {
+      //      renderer.Clear(kiColor(0.4, 0.4, 0.4));
       renderer.Clear();
+    } else {
+      //      renderer.Clear();
+      renderer.Clear(kiColor(0.4, 0.4, 0.4));
     }
 
     renderer.Blit(*tex, Vector2i(0, 0));

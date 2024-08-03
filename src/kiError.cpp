@@ -27,3 +27,9 @@ kiInfo(std::string const& msg)
 {
   std::cerr << "[I] " << msg << std::endl;
 }
+
+void
+kiDebug(std::string const& msg)
+{
+  std::cerr << "[D] " << msg << std::endl;
+}

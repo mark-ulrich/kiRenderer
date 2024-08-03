@@ -1,4 +1,7 @@
 #include "kiColor.h"
+#include "kiMath.h"
+
+const kiColor kiColor::Black = kiColor(0.0f, 0.0f, 0.0f);
 
 u32
 kiColor::PackARGB() const
@@ -49,4 +52,27 @@ kiColor::FromRGB(u32 packed)
                 static_cast<float>(g) / 255.0f,
                 static_cast<float>(b) / 255.0f);
   return color;
+}
+
+bool
+kiColor::operator==(const kiColor& other) const
+{
+  return r == other.r && g == other.g && b == other.b && a == other.a;
+}
+
+bool
+kiColor::operator!=(const kiColor& other) const
+{
+  return !(*this == other);
+}
+
+kiColor
+kiColor::Blend(kiColor color, const kiColor& color1, float alpha)
+{
+  kiColor blendedColor;
+  blendedColor.r = fe::Math::Lerp<float>(color.r, color1.r, alpha);
+  blendedColor.g = fe::Math::Lerp<float>(color.g, color1.g, alpha);
+  blendedColor.b = fe::Math::Lerp<float>(color.b, color1.b, alpha);
+  blendedColor.a = fe::Math::Lerp<float>(color.a, color1.a, alpha);
+  return blendedColor;
 }

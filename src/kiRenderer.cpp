@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <algorithm>
 #include <cassert>
+#include <format>
 
 #include "kiError.h"
 #include "kiRenderer.h"
@@ -11,14 +12,14 @@ kiRenderer::kiRenderer(int width, int height, float scale)
   this->height = height;
   this->scale = scale;
 
-
   // Init SDL window & renderer
-  sdlWindow = SDL_CreateWindow("kiRenderer",
-                               SDL_WINDOWPOS_CENTERED,
-                               SDL_WINDOWPOS_CENTERED,
-                               static_cast<int>(static_cast<float>(width) * scale),
-                                   static_cast<int>(static_cast<float>(height) * scale),
-                               0);
+  sdlWindow =
+    SDL_CreateWindow("kiRenderer",
+                     SDL_WINDOWPOS_CENTERED,
+                     SDL_WINDOWPOS_CENTERED,
+                     static_cast<int>(static_cast<float>(width) * scale),
+                     static_cast<int>(static_cast<float>(height) * scale),
+                     0);
   if (!sdlWindow) {
     kiFatal();
   }
@@ -57,7 +58,35 @@ kiRenderer::DrawPixel(Vector2i const& position, kiColor const& color)
   }
   int index = position.y * (pitch / 4) + position.x;
   u32 pixel = color.PackARGB();
-  pixels[index] = pixel;
+  // Fix below alpha code for non-RGBA formats
+  float alpha = (static_cast<float>((pixel & 0xff000000) >> 24)) / 255.0f;
+  float inverseAlpha = 1.0f - alpha;
+  kiColor blendedColor =
+    kiColor::Blend(color, kiColor::FromARGB(pixels[index]), inverseAlpha);
+
+#if 1
+  if (position == Vector2i(33, 57) &&
+      kiColor::FromARGB(pixels[index]) != kiColor::Black) {
+    kiDebug(std::format("Background color: ({}, {}, {}, {})",
+                        kiColor::FromARGB(pixels[index]).r,
+                        kiColor::FromARGB(pixels[index]).g,
+                        kiColor::FromARGB(pixels[index]).b,
+                        kiColor::FromARGB(pixels[index]).a));
+    kiDebug(std::format("Foreground color: ({}, {}, {}, {})",
+                        color.r,
+                        color.g,
+                        color.b,
+                        color.a));
+    kiDebug(std::format("Blended color: ({}, {}, {}, {})",
+                        blendedColor.r,
+                        blendedColor.g,
+                        blendedColor.b,
+                        blendedColor.a));
+  }
+#endif
+
+  u32 blendedPixel = blendedColor.PackARGB();
+  pixels[index] = blendedPixel;
 }
 
 // Render a colored line between points p1 and p2.
@@ -140,10 +169,12 @@ void
 kiRenderer::Blit(kiTexture const& texture, Vector2i const& position)
 {
   // TODO: Optimize this
-  for (int y = 0; y < texture.GetHeight(); ++y) {
-    for (int x = 0; x < texture.GetWidth(); ++x) {
-      DrawPixel(Vector2i(x + position.x, y + position.y),
-                texture.GetPixel(x, y));
+  for (int y = 0; y < texture.Height(); ++y) {
+    for (int x = 0; x < texture.Width(); ++x) {
+      kiColor color = texture.PixelAt(x, y);
+      if (texture.UsesColorKey() && texture.ColorKey() == color)
+        continue;
+      DrawPixel(Vector2i(x + position.x, y + position.y), color);
     }
   }
 }

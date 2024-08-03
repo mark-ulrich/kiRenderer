@@ -6,17 +6,19 @@
 
 struct kiColor
 {
+  static const kiColor Black;
+
   float r, g, b, a;
 
   kiColor()
     : r(0.0f)
     , g(0.0f)
     , b(0.0f)
-    , a(0.0f)
+    , a(1.0f)
   {
   }
 
-  kiColor(float r, float g, float b, float a = 0.0f)
+  kiColor(float r, float g, float b, float a = 1.0f)
     : r(r)
     , g(g)
     , b(b)
@@ -26,9 +28,13 @@ struct kiColor
 
   FE_NODISCARD u32 PackARGB() const;
 
+  FE_NODISCARD bool operator==(kiColor const& other) const;
+  FE_NODISCARD bool operator!=(kiColor const& other) const;
+
   static kiColor FromARGB(u32 packed);
   static kiColor FromRGBA(u32 packed);
   static kiColor FromRGB(u32 packed);
+  static kiColor Blend(kiColor color, const kiColor& color1, float alpha);
 };
 
 #endif //  __KICOLOR_H__

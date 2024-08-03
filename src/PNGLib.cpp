@@ -2,8 +2,8 @@
 
 #include "PNGLib.h"
 #include "kiError.h"
-#include "types.h"
 #include "kiUtil.h"
+#include "types.h"
 #include "zlib.h"
 
 #include <cstdio>
@@ -113,8 +113,8 @@ LoadTexturePNG(std::string const& path)
 
       puts("");
       printf("IHDR:\n");
-      printf("width:             %d\n", png.IHDR->width);
-      printf("height:            %d\n", png.IHDR->height);
+      printf("_width:             %d\n", png.IHDR->width);
+      printf("_height:            %d\n", png.IHDR->height);
       printf("colorType:         %d\n", png.IHDR->colorType);
       printf("compressionMethod: %d\n", png.IHDR->compressionMethod);
       printf("filterMethod:      %d\n", png.IHDR->filterMethod);
@@ -206,7 +206,7 @@ LoadTexturePNG(std::string const& path)
       if (node->chunk->type == PNG_IHDR) {
         delete (PNGIHDR*)node->chunk->data;
       } else if (node->chunk->type == PNG_IDAT) {
-        delete[](u8*) node->chunk->data;
+        delete[] (u8*)node->chunk->data;
       }
       delete node->chunk;
     }

@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "kirenderer"
+version = "0.1.0"
+description = ""
+authors = ["Mark Ulrich <mark.ulrich.86@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pygame = "^2.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
