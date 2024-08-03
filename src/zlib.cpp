@@ -1,3 +1,5 @@
+#include <SDL2/SDL.h>
+
 #include <sstream>
 
 #include "kiError.h"
@@ -95,7 +97,7 @@ zlibDeflate(void* destBuffer, void* compressed)
       // TODO: Check NLEN
 
       ++byteNeedle += 2;
-      memcpy(dst + destNeedle, src + byteNeedle, blockLen);
+      SDL_memcpy(dst + destNeedle, src + byteNeedle, blockLen);
       destNeedle += blockLen;
       byteNeedle += blockLen;
 
